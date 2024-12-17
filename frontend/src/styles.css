@@ -1,0 +1,453 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS for the body and layout */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f7fafc; /* Light background for the body */
+}
+
+/* Navbar background color */
+.navbar {
+  background-color: #2d3748; /* Dark gray for navbar */
+}
+
+/* Footer background color */
+.footer {
+  background-color: #2d3748; /* Dark gray for footer */
+}
+
+/* Styling for the navbar items */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Hover effects for links */
+a {
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 0.375rem; /* Rounded corners */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+a:hover {
+  background-color: #4a5568; /* Darker hover background */
+  transform: scale(1.05); /* Slight zoom effect */
+}
+
+/* Active tab styling */
+.bg-indigo-500 {
+  background-color: #667eea; /* Active tab background */
+}
+
+/* Styling the links when hovered or active */
+.text-white {
+  color: #fff;
+}
+
+.text-2xl {
+  font-size: 1.5rem; /* Larger title size */
+}
+
+.text-gray-600 {
+  color: #4a5568; /* Darker gray text */
+}
+
+.text-xl {
+  font-size: 1.25rem;
+}
+
+/* Spacing between navbar items */
+.space-x-8 > :not([hidden]) ~ :not([hidden]) {
+  margin-left: 2rem;
+}
+
+/* Custom shadows and rounding */
+.shadow-lg {
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-md {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.rounded-lg {
+  border-radius: 0.375rem; /* 6px radius */
+}
+
+.mt-10 {
+  margin-top: 2.5rem;
+}
+
+.p-6 {
+  padding: 1.5rem;
+}
+
+/* Footer styles */
+footer {
+  background-color: #2d3748;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  margin-top: auto; /* Pushes footer to the bottom */
+}
+
+footer p {
+  margin: 0;
+}
+
+
+
+/* Project Assignment Page Custom Styles */
+
+/* Container for the whole page */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Project List */
+  .project-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .project-card {
+    background-color: #ffffff;
+    padding: 1.25rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .project-card:hover {
+    background-color: #e0f7fa;
+    transform: translateY(-5px);
+  }
+  
+  /* Progress Status */
+  .progress {
+    margin-top: 1rem;
+  }
+  
+  .progress .text-sm {
+    font-size: 0.875rem;
+  }
+  
+  .progress .font-semibold {
+    font-weight: 600;
+  }
+  
+  /* Add custom color for status */
+  .text-red-600 {
+    color: #e53e3e;
+  }
+  
+  .text-yellow-600 {
+    color: #d69e2e;
+  }
+  
+  .text-green-600 {
+    color: #48bb78;
+  }
+  
+  /* Button Styling */
+  button {
+    background-color: #63b3ed;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.375rem;
+    font-size: 1.125rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #3182ce;
+  }
+  
+
+
+  /* Scoring System Page Custom Styles */
+
+/* Container for the whole page */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Project List */
+  .project-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .project-card {
+    background-color: #ffffff;
+    padding: 1.25rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .project-card:hover {
+    background-color: #e0f7fa;
+    transform: translateY(-5px);
+  }
+  
+  /* Score Breakdown */
+  .task-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .task-item {
+    padding: 1rem;
+    background-color: #f7fafc;
+    border-radius: 0.375rem;
+  }
+  
+  .text-gray-500 {
+    color: #a0aec0;
+  }
+  
+  /* Progress Bars */
+  .w-full {
+    width: 100%;
+  }
+  
+  .bg-sky-500 {
+    background-color: #63b3ed;
+  }
+  
+  .bg-gray-200 {
+    background-color: #edf2f7;
+  }
+  
+  .bg-gray-300 {
+    background-color: #e2e8f0;
+  }
+  
+  .bg-green-500 {
+    background-color: #48bb78;
+  }
+  
+  .bg-gray-100 {
+    background-color: #f7fafc;
+  }
+  
+  /* Status Colors */
+  .text-green-600 {
+    color: #48bb78;
+  }
+  
+  .text-yellow-600 {
+    color: #d69e2e;
+  }
+  
+  .text-red-600 {
+    color: #e53e3e;
+  }
+  
+  /* Button Styling */
+  button {
+    background-color: #63b3ed;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.375rem;
+    font-size: 1.125rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #3182ce;
+  }
+  
+
+
+
+
+
+  /* User Profile Page Custom Styles */
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Profile Card */
+  .profile-card {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Profile Info */
+  .profile-info .info-row {
+    margin-bottom: 1rem;
+  }
+  
+  .profile-info .info-row span {
+    display: inline-block;
+    width: 120px;
+    font-weight: 500;
+    color: #4a5568;
+  }
+  
+  .input-field {
+    width: 100%;
+    padding: 0.75rem;
+    margin-top: 0.25rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    background-color: #f7fafc;
+    font-size: 1rem;
+    color: #4a5568;
+  }
+  
+  .input-field:focus {
+    outline: none;
+    border-color: #63b3ed;
+    background-color: #ffffff;
+  }
+  
+  /* Button Styles */
+  .btn {
+    padding: 0.75rem 2rem;
+    border-radius: 0.375rem;
+    font-size: 1.125rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-primary {
+    background-color: #63b3ed;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background-color: #3182ce;
+  }
+  
+  .btn-danger {
+    background-color: #e53e3e;
+    color: white;
+  }
+  
+  .btn-danger:hover {
+    background-color: #c53030;
+  }
+  
+  /* Text Color for Profile */
+  .text-gray-600 {
+    color: #4a5568;
+  }
+  
+  .text-gray-700 {
+    color: #2d3748;
+  }
+  
+
+
+  /* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7fafc;
+  }
+  
+  /* Container for Login/Signup pages */
+  .login-container, .signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Card for Login/Signup */
+  .login-card, .signup-card {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #2d3748;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Input fields */
+  .input-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .input-label {
+    font-weight: 600;
+    color: #4a5568;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .input-field {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+    border: 1px solid #e2e8f0;
+    background-color: #f7fafc;
+    color: #4a5568;
+    font-size: 1rem;
+  }
+  
+  .input-field:focus {
+    outline: none;
+    border-color: #63b3ed;
+  }
+  
+  /* Buttons */
+  .btn {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+    font-size: 1.125rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-primary {
+    background-color: #63b3ed;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background-color: #3182ce;
+  }
+  
+  /* Text Links */
+  .text-center {
+    text-align: center;
+  }
+  
+  .text-sky-500 {
+    color: #63b3ed;
+    cursor: pointer;
+  }
+  
+  .text-sky-500:hover {
+    text-decoration: underline;
+  }
+  
