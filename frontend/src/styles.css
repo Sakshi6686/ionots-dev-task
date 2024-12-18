@@ -450,4 +450,351 @@ body {
   .text-sky-500:hover {
     text-decoration: underline;
   }
+
+
+/* Predefined Skills Buttons */
+.skills-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.skill-btn {
+  background-color: #edf2f7;
+  color: #2d3748;
+  border: 1px solid #e2e8f0;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.skill-btn:hover {
+  background-color: #e2e8f0;
+}
+
+.skill-btn.selected {
+  background-color: #63b3ed;
+  color: white;
+  border-color: #3182ce;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skills-list span {
+  background-color: #bee3f8;
+  color: #2b6cb0;
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 0.875rem;
+}
+
+.skills-list span button {
+  background-color: transparent;
+  border: none;
+  color: #e53e3e;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+.skills-list span button:hover {
+  color: #c53030;
+}
+
+
+/* Ensure the signup page is centered and has padding on smaller screens */
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 16px;
+}
+
+.signup-card {
+  background-color: white;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  overflow-x: auto; /* This prevents the form from overflowing */
+}
+
+/* Form inputs and labels styling */
+.input-group {
+  margin-bottom: 16px;
+}
+
+.input-label {
+  font-weight: bold;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  margin-top: 6px;
+}
+
+/* Button Styles */
+.btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background-color: #3182ce;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #2c5282;
+}
+
+/* Skills Section */
+.skills-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.skill-btn {
+  background-color: #edf2f7;
+  color: #2d3748;
+  border: 1px solid #e2e8f0;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.skill-btn:hover {
+  background-color: #e2e8f0;
+}
+
+.skill-btn.selected {
+  background-color: #63b3ed;
+  color: white;
+  border-color: #3182ce;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skills-list span {
+  background-color: #bee3f8;
+  color: #2b6cb0;
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 0.875rem;
+}
+
+.skills-list span button {
+  background-color: transparent;
+  border: none;
+  color: #e53e3e;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+.skills-list span button:hover {
+  color: #c53030;
+}
+
+/* Responsive styling for smaller screens */
+@media (max-width: 768px) {
+  .signup-card {
+    padding: 16px;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+
+/* Overall container styling */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f7fafc;
+}
+
+/* Profile Card Styling */
+.profile-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  margin-top: 20px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.profile-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Profile Info Section */
+.profile-info {
+  margin-bottom: 20px;
+}
+
+/* Info Row Styling */
+.info-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.info-row span {
+  font-weight: 600;
+  color: #4a5568;
+  width: 100px;
+}
+
+.info-row input {
+  padding: 10px;
+  margin-left: 20px;
+  width: 100%;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background-color: #f7fafc;
+  font-size: 16px;
+}
+
+.info-row input:focus {
+  outline: none;
+  border-color: #3182ce;
+}
+
+/* Edit Button and Logout Button */
+.btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #3182ce;
+  color: #fff;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #2b6cb0;
+}
+
+.btn-danger {
+  background-color: #e53e3e;
+  color: #fff;
+  border: none;
+}
+
+.btn-danger:hover {
+  background-color: #c53030;
+}
+
+/* Text Styling */
+h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #2d3748;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.text-gray-600 {
+  color: #4a5568;
+}
+
+.text-gray-700 {
+  color: #2d3748;
+}
+
+.text-gray-700 span {
+  font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+
+  .profile-card {
+    padding: 20px;
+  }
+
+  .info-row {
+    flex-direction: column;
+  }
+
+  .info-row span {
+    margin-bottom: 5px;
+  }
+
+  .info-row input {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+
+
+
+  /* Welcome Message Container */
+.welcome-container {
+  background: linear-gradient(90deg, #4f46e5, #3b82f6);
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  margin: 2rem auto;
+  max-width: 800px;
+  color: #fff;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Welcome Title */
+.welcome-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Welcome Description */
+.welcome-description {
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
   

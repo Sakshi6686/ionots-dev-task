@@ -7,6 +7,14 @@ import PrivateRoute from './components/PrivateRoute';
 import Layout from './Layout';  
 
 import 'react-toastify/dist/ReactToastify.css'; 
+ 
+import ScoringSystem from './components/ScoringSystem';
+import UserProfile from './components/Profile';
+import ProgressTracking from './components/ProgressTracking';
+ 
+import RecommendedProjects from './components/RecommendedProjects';
+import AssingedProjects from './components/ProgressTracking';
+import ProjectDetails from './components/ProjectDescription';
 
 const App = () => {
   return (
@@ -28,6 +36,61 @@ const App = () => {
             </PrivateRoute>
           } 
         />
+         <Route 
+          path="/project-assignment" 
+          element={
+            <PrivateRoute>
+            <Layout>
+            <RecommendedProjects />
+            </Layout>
+           
+            </PrivateRoute>
+          } 
+        />
+         <Route 
+          path="/progress-tracking" 
+          element={
+            <PrivateRoute>
+            <Layout>
+            <AssingedProjects/>
+            </Layout>
+            
+            </PrivateRoute>
+          } 
+        />
+         <Route 
+          path="/score-system" 
+          element={
+            <PrivateRoute>
+            <Layout>
+            <ScoringSystem />
+            </Layout>
+            
+            </PrivateRoute>
+          } 
+        />
+         <Route 
+          path="/profile" 
+          element={
+            <PrivateRoute>
+            
+              <Layout>
+              <UserProfile />
+              </Layout>
+            </PrivateRoute>
+          } 
+        />
+        
+         <Route 
+    path="/project/:projectId" 
+    element={
+      <PrivateRoute>
+        <Layout>
+          <ProjectDetails />
+        </Layout>
+      </PrivateRoute>
+    }
+  />
       </Routes>
 
       

@@ -1,108 +1,109 @@
 import { useState, useEffect } from 'react';
+import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 
-const ScoringSystem = () => {
-  const [projects, setProjects] = useState([]);
+const ProjectCompletionChart = () => {
+  const [chartData, setChartData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-     
-    const fetchScores = () => {
+    const fetchChartData = async () => {
       setLoading(true);
-       
-      setTimeout(() => {
-        setProjects([
-          {
-            id: 1,
-            title: 'Project A',
-            description: 'Data analysis on sales data',
-            totalScore: 95,
-            tasks: [
-              { title: 'Data Collection', score: 20, maxScore: 25 },
-              { title: 'Data Cleaning', score: 30, maxScore: 35 },
-              { title: 'Model Training', score: 45, maxScore: 45 },
-            ]
-          },
-          {
-            id: 2,
-            title: 'Project B',
-            description: 'AI model for recommendation system',
-            totalScore: 60,
-            tasks: [
-              { title: 'Data Collection', score: 10, maxScore: 15 },
-              { title: 'Model Design', score: 25, maxScore: 40 },
-            ]
-          }
-        ]);
+
+      const authToken = localStorage.getItem('token');
+
+      if (!authToken) {
+        console.error('No auth token found');
         setLoading(false);
-      }, 1000);
+        return;
+      }
+
+      try {
+        const response = await fetch(
+          '/api/manage-projects/get-number-of-accepted-completed-projects',
+          {
+            headers: { Authorization: `Bearer ${authToken}` },
+          }
+        );
+
+        const data = await response.json();
+
+        if (data.success) {
+          const completed = data.completed.length;
+          const accepted = data.accepted.length;
+          const total = completed + accepted;
+
+          const formattedData = [
+            { name: 'Completed', value: completed, percent: (completed / total) * 100 },
+            { name: 'Not Completed', value: accepted, percent: (accepted / total) * 100 },
+          ];
+
+          setChartData(formattedData);
+        } else {
+          console.error('Failed to fetch data:', data.message);
+        }
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching chart data:', error);
+        setLoading(false);
+      }
     };
 
-    fetchScores();
+    fetchChartData();
   }, []);
 
+  const COLORS = ['#4CAF50', '#FF5733']; // Green for completed, Red for not completed
+
+  const renderCustomTooltip = ({ payload, active }) => {
+    if (active && payload && payload.length) {
+      const { name, value, percent } = payload[0].payload;
+      return (
+        <div className="bg-white text-gray-800 p-3 rounded-lg shadow-md">
+          <p className="font-bold">{name}</p>
+          <p>Count: {value}</p>
+          <p>Percentage: {percent.toFixed(2)}%</p>
+        </div>
+      );
+    }
+    return null;
+  };
+
   return (
-    <div className="container p-6">
-      <h2 className="text-3xl font-semibold text-gray-700 mb-6">Scoring System</h2>
+    <div className="container mx-auto p-8 bg-gradient-to-r from-blue-100 to-gray-100 shadow-lg rounded-lg">
+      <h2 className="text-3xl font-extrabold text-gray-700 text-center mb-8">
+        Project Completion Distribution
+      </h2>
 
       {loading ? (
-        <div className="text-center text-gray-500">Loading project scores...</div>
-      ) : (
-        <div className="project-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-          {projects.map((project) => (
-            <div
-              key={project.id}
-              className="project-card bg-white shadow-md rounded-lg p-4 cursor-pointer hover:bg-sky-100"
+        <div className="text-center text-gray-500">Loading chart data...</div>
+      ) : chartData.length > 0 ? (
+        <div className="flex justify-center items-center">
+          <PieChart width={450} height={450}>
+            <Pie
+              data={chartData}
+              dataKey="value"
+              nameKey="name"
+              cx="50%"
+              cy="50%"
+              outerRadius={150}
+              innerRadius={100}
+              label={({ name, percent }) =>
+                `${name}: ${percent.toFixed(1)}%`
+              }
+              fill="#8884d8"
             >
-              <h3 className="text-xl font-semibold text-gray-800">{project.title}</h3>
-              <p className="text-gray-600">{project.description}</p>
-
-            
-              <div className="mt-4">
-                <h4 className="text-lg font-semibold text-gray-700">Score Breakdown:</h4>
-                <ul className="task-list space-y-4 mt-2">
-                  {project.tasks.map((task, index) => (
-                    <li key={index} className="task-item bg-gray-100 p-3 rounded-lg">
-                      <div className="flex justify-between items-center">
-                        <span className="text-sm text-gray-700">{task.title}</span>
-                        <span className="text-sm font-semibold text-gray-800">
-                          {task.score} / {task.maxScore}
-                        </span>
-                      </div>
-                      <div className="progress-bar mt-2">
-                        <div className="w-full bg-gray-300 rounded-full h-2">
-                          <div
-                            className="bg-sky-500 h-2 rounded-full"
-                            style={{ width: `${(task.score / task.maxScore) * 100}%` }}
-                          ></div>
-                        </div>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-             
-              <div className="total-score mt-4">
-                <span className="text-sm text-gray-500">Total Score:</span>
-                <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
-                  <div
-                    className="bg-green-500 h-2 rounded-full"
-                    style={{ width: `${(project.totalScore / project.tasks.reduce((sum, task) => sum + task.maxScore, 0)) * 100}%` }}
-                  ></div>
-                </div>
-                <div className="flex justify-between mt-1 text-sm">
-                  <span className="text-gray-500">{project.totalScore}</span>
-                  <span className={`font-semibold ${project.totalScore >= 80 ? 'text-green-600' : project.totalScore >= 50 ? 'text-yellow-600' : 'text-red-600'}`}>
-                    {project.totalScore >= 80 ? 'Excellent' : project.totalScore >= 50 ? 'Good' : 'Needs Improvement'}
-                  </span>
-                </div>
-              </div>
-            </div>
-          ))}
+              {chartData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              ))}
+            </Pie>
+            <Tooltip content={renderCustomTooltip} />
+            <Legend />
+          </PieChart>
         </div>
+      ) : (
+        <div className="text-center text-gray-500">No data available</div>
       )}
     </div>
   );
 };
 
-export default ScoringSystem;
+export default ProjectCompletionChart;

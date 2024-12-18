@@ -1,48 +1,45 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const ProgressTracking = () => {
- 
+const AssingedProjects = () => {
   const [projects, setProjects] = useState([]);
-     const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
+  const [toastMessage, setToastMessage] = useState('');
+
+  // Fetch the projects
+  const fetchProjects = async () => {
+    setLoading(true);
+    const authToken = localStorage.getItem('token');
+
+    if (!authToken) {
+      console.error('No auth token found');
+      setToastMessage('Authentication failed');
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const response = await axios.get('/api/manage-projects/get-all-projects', {
+        headers: { Authorization: `Bearer ${authToken}` },
+      });
+
+      if (response.data.success) {
+        // Filter projects that are either Accepted or Completed
+        const filteredProjects = response.data.projects.filter(
+          (project) => project.status === 'Accepted' || project.status === 'Completed'
+        );
+        setProjects(filteredProjects);
+      } else {
+        setToastMessage('Failed to fetch projects');
+      }
+    } catch (err) {
+      setToastMessage('Server error occurred');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    
-    const fetchProjects = () => {
-      setLoading(true);
-    
-      setTimeout(() => {
-        setProjects([
-          {
-            id: 1,
-            title: 'Project A',
-            description: 'Data analysis on sales data',
-            status: 'In Progress',
-            progress: 65,
-            tasks: [
-             
-             
-         { title: 'Data Collection', progress: 50, status: 'In Progress' },
-             { title: 'Data Cleaning', progress: 75, status: 'In Progress' },
-              { title: 'Model Training', progress: 100, status: 'Completed' },
-            ]
-          },
-          {
-            id: 2,
-            title: 'Project B',
-            description: 'AI model for recommendation system',
-            status: 'Not Started',
-            progress: 0,
-            tasks: [
-              { title: 'Data Collection', progress: 0, status: 'Not Started' },
-
-              { title: 'Model Design', progress: 0, status: 'Not Started' },
-            ]
-          }
-        ]);
-        setLoading(false);
-      }, 1000);
-    };
-
     fetchProjects();
   }, []);
 
@@ -50,71 +47,65 @@ const ProgressTracking = () => {
     <div className="container p-6">
       <h2 className="text-3xl font-semibold text-gray-700 mb-6">Progress Tracking</h2>
 
+      {/* Toast Message */}
+      {toastMessage && (
+        <div
+          className="toast-message bg-red-500 text-white p-4 rounded-md fixed top-4 right-4 shadow-md"
+          onClick={() => setToastMessage('')}
+        >
+          {toastMessage}
+        </div>
+      )}
+
+      {/* Loading State */}
       {loading ? (
         <div className="text-center text-gray-500">Loading projects...</div>
       ) : (
-        <div className="project-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-          {projects.map((project) => (
-            <div
-              key={project.id}
-              className="project-card bg-white shadow-md rounded-lg p-4 cursor-pointer hover:bg-sky-100"
-            >
-              <h3 className="text-xl font-semibold text-gray-800">{project.title}</h3>
-              <p className="text-gray-600">{project.description}</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+          {projects.length > 0 ? (
+            projects.map((project) => (
+              <div
+                key={project.projectId}
+                className="bg-white shadow-md rounded-lg p-4 hover:bg-sky-100 transition"
+              >
+                <h3 className="text-xl font-semibold text-gray-800">
+                  {project.projectTitle}
+                </h3>
 
-              
-              <div className="mt-4">
-                <span className="text-sm text-gray-500">Overall Progress:</span>
-                <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
-                  <div
-                    className="bg-sky-500 h-2 rounded-full"
-                    style={{ width: `${project.progress}%` }}
-                  ></div>
+                {/* Project Status */}
+                <div className="mt-2">
+                  <span className="text-sm font-semibold">Status:</span>{' '}
+                  <span className="text-sm text-gray-700">{project.status}</span>
                 </div>
-                <div className="flex justify-between mt-1 text-sm">
-                  <span className="text-gray-500">{project.progress}%</span>
-                  <span className={`font-semibold ${project.status === 'Completed' ? 'text-green-600' : project.status === 'In Progress' ? 'text-yellow-600' : 'text-red-600'}`}>
-                    {project.status}
+
+                {/* Project Skills */}
+                <div className="mt-2">
+                  <span className="text-sm font-semibold">Skills:</span>{' '}
+                  <span className="text-sm text-gray-500">
+                    {project.ProjectSkills && project.ProjectSkills.length > 0
+                      ? project.ProjectSkills.join(', ')
+                      : 'No skills specified'}
                   </span>
                 </div>
-              </div>
 
-            
-              <div className="tasks mt-4">
-                <h4 className="text-lg font-semibold text-gray-700">Tasks:</h4>
-                <ul className="task-list space-y-4 mt-2">
-                  {project.tasks.map((task, index) => (
-                    <li key={index} className="task-item bg-gray-100 p-3 rounded-lg">
-                      <div className="flex justify-between items-center">
-                        <span className="text-sm text-gray-700">{task.title}</span>
-                        <span className={`text-sm font-semibold ${task.status === 'Completed' ? 'text-green-600' : task.status === 'In Progress' ? 'text-yellow-600' : 'text-red-600'}`}>
-                          {task.status}
-                        </span>
-                      </div>
-                      <div className="progress-bar mt-2">
-                        <div className="w-full bg-gray-300 rounded-full h-2">
-                          <div
-                            className="bg-sky-500 h-2 rounded-full"
-                            style={{ width: `${task.progress}%` }}
-                          ></div>
-                        </div>
-                        <div className="text-sm flex justify-between mt-1">
-                          <span className="text-gray-500">{task.progress}%</span>
-                        </div>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+                {/* View Project Button */}
+                <button
+                  className="mt-4 bg-sky-500 text-white px-6 py-2 rounded-lg hover:bg-sky-700 transition w-full"
+                  onClick={() => window.location.href = `/project/${project.projectId}`} // Navigate to project details
+                >
+                 {project.status==="Accepted"?'View Project':'Completed'}
+                </button>
               </div>
+            ))
+          ) : (
+            <div className="text-center text-gray-500">
+              No Accepted or Completed projects found.
             </div>
-               ))}
-
-
-
+          )}
         </div>
       )}
     </div>
   );
 };
 
-export default ProgressTracking;
+export default AssingedProjects 

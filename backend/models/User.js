@@ -16,9 +16,20 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   skills: {
-    type: [String],  
-    default: [],  
+    type: [String],
+    default: [],
   },
+  assignedProjects: [
+    {
+      projectId: Number,
+      projectTitle: String,
+      projectDescription: String,
+      ProjectSkills: [String],
+      status: { type: String, default: 'Not Started' },
+      score: { type: Number, default: 0 },
+      uploadedFile: { type: String, default: '' }, // File path for uploaded file
+    },
+  ],
 });
 
 const User = mongoose.model('User', userSchema);

@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import axios from 'axios'; 
+import axios from 'axios';
 import toast from 'react-hot-toast';
 
 const SignupPage = () => {
@@ -9,63 +8,57 @@ const SignupPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [skills, setSkills] = useState([]);  
-  const [skillInput, setSkillInput] = useState('');  
-  const navigate = useNavigate();  
+  const [skills, setSkills] = useState([]);
+  const navigate = useNavigate();
 
-  const handleAddSkill = () => {
-    if (skillInput.trim() && !skills.includes(skillInput.trim())) {
-      setSkills([...skills, skillInput.trim()]);
+  // Predefined list of skills
+  const predefinedSkills = [
+    "Data Analysis", 
+    "AI Model", 
+    "Chatbot Development", 
+    "Blockchain", 
+    "Predictive Analytics", 
+    "Image Classification"
+  ];
 
-
-      setSkillInput(''); 
+  // Handle adding a skill
+  const handleAddSkill = (skill) => {
+    if (!skills.includes(skill)) {
+      setSkills([...skills, skill]);
     }
   };
 
+  // Handle removing a skill
   const handleRemoveSkill = (skill) => {
-    setSkills(skills.filter((s) => s !== skill)); 
-
-
+    setSkills(skills.filter((s) => s !== skill));
   };
 
+  // Handle form submission
   const handleSignup = async (e) => {
     e.preventDefault();
 
-     
     if (password !== confirmPassword) {
-
-
-      toast.error('Passwords do not match');  
+      toast.error('Passwords do not match');
       return;
     }
 
     try {
-    
-      const response = await axios.post('/api/auth/signup', { 
-        name, 
-        email, 
-        password, 
-        confirmPassword, 
-        skills 
+      const response = await axios.post('/api/auth/signup', {
+        name,
+        email,
+        password,
+        confirmPassword,
+        skills
       });
 
-      console.log(response.data,"1");
-      console.log(response.data.success,"1");
       if (response.data.success) {
-        console.log(response.data);
-        console.log(response.data.success);
-
-        
-        toast.success('User registered successfully!'); 
-        navigate('/');  
+        toast.success('User registered successfully!');
+        navigate('/');
       } else {
-        toast.error(response.data.message);  
+        toast.error(response.data.message);
       }
     } catch (err) {
-    
-      console.log(err.message);
-
-      toast.error('An error occurred during signup'); 
+      toast.error('An error occurred during signup');
     }
   };
 
@@ -122,25 +115,21 @@ const SignupPage = () => {
               required
             />
           </div>
- 
+
+          {/* Skills Section */}
           <div className="input-group">
             <label htmlFor="skills" className="input-label">Skills</label>
-            <div className="flex items-center space-x-2">
-              <input
-                type="text"
-                id="skills"
-                value={skillInput}
-                onChange={(e) => setSkillInput(e.target.value)}
-                className="input-field"
-                placeholder="Enter a skill"
-              />
-              <button
-                type="button"
-                onClick={handleAddSkill}
-                className="btn btn-secondary"
-              >
-                Add
-              </button>
+            <div className="skills-options">
+              {predefinedSkills.map((skill, index) => (
+                <button
+                  type="button"
+                  key={index}
+                  className={`skill-btn ${skills.includes(skill) ? 'selected' : ''}`}
+                  onClick={() => handleAddSkill(skill)}
+                >
+                  {skill}
+                </button>
+              ))}
             </div>
             <div className="skills-list mt-2">
               {skills.map((skill, index) => (
