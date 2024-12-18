@@ -19,7 +19,7 @@ const ProjectCompletionChart = () => {
 
       try {
         const response = await fetch(
-          '/api/manage-projects/get-number-of-accepted-completed-projects',
+          'https://ionots-dev-task-backend.onrender.com/api/manage-projects/get-number-of-accepted-completed-projects',
           {
             headers: { Authorization: `Bearer ${authToken}` },
           }
