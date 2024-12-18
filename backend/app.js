@@ -19,7 +19,14 @@ const app = express();
 
  
 app.use(express.json());  
-app.use(cors());  
+const corsOptions = {
+  origin: process.env.FRONTEND_URL || 'https://ionots-dev-task-frontend.onrender.com', // Replace with your frontend URL
+  credentials: true,
+};
+app.use(cors(corsOptions));
+
+
+
 
 
 
