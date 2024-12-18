@@ -19,7 +19,7 @@ const LoginPage = () => {
 
     try {
      
-      const response = await axios.post('/api/auth/login', {
+      const response = await axios.post('https://ionots-dev-task-backend.onrender.com/api/auth/login', {
         email,
         password,
       });
