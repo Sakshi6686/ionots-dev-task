@@ -14,7 +14,6 @@ const UserProfile = () => {
   const [updatedUser, setUpdatedUser] = useState(user);
   const navigate = useNavigate(); 
 
-  
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -29,8 +28,15 @@ const UserProfile = () => {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        setUser(response.data);  
-        setUpdatedUser(response.data); 
+        const userData = response.data;
+        setUser({
+          ...userData,
+          skills: userData.skills || [],
+        });
+        setUpdatedUser({
+          ...userData,
+          skills: userData.skills || [],
+        });
       } catch (error) {
         console.error(error);
         toast.error('Failed to fetch user data');
@@ -56,9 +62,14 @@ const UserProfile = () => {
           }
         );
   
-       
-        setUser(response.data.user);
-        setUpdatedUser(response.data.user);
+        setUser({
+          ...response.data.user,
+          skills: response.data.user.skills || [],
+        });
+        setUpdatedUser({
+          ...response.data.user,
+          skills: response.data.user.skills || [],
+        });
         toast.success('Profile updated successfully!');
       } catch (error) {
         console.error(error);
@@ -68,7 +79,6 @@ const UserProfile = () => {
   
     setIsEditing(!isEditing);  
   };
-  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -79,7 +89,6 @@ const UserProfile = () => {
   };
 
   const handleLogout = () => {
-    
     localStorage.removeItem('token');
     navigate('/'); 
     toast.success('Logged out successfully');
@@ -125,11 +134,9 @@ const UserProfile = () => {
               <input
                 type="text"
                 name="skills"
-                value={updatedUser.skills.join(', ')}  
+                value={updatedUser.skills?.join(', ')}  
                 onChange={(e) =>
-
                   setUpdatedUser({
-
                     ...updatedUser,
                     skills: e.target.value.split(',').map((skill) => skill.trim()),
                   })
@@ -137,8 +144,9 @@ const UserProfile = () => {
                 className="input-field"
               />
             ) : (
-              <span className="text-gray-600">{user.skills.join(', ')}</span>
-
+              <span className="text-gray-600">
+                {user.skills?.length ? user.skills.join(', ') : 'No skills added'}
+              </span>
             )}
           </div>
         </div>
@@ -151,15 +159,11 @@ const UserProfile = () => {
             {isEditing ? 'Save' : 'Edit Profile'}
           </button>
           <button
-
-
             onClick={handleLogout}
             className="btn btn-danger"
           >
             Logout
           </button>
-
-          
         </div>
       </div>
     </div>
