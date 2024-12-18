@@ -19,7 +19,7 @@ const AssingedProjects = () => {
     }
 
     try {
-      const response = await axios.get('/api/manage-projects/get-all-projects', {
+      const response = await axios.get('https://ionots-dev-task-backend.onrender.com/api/manage-projects/get-all-projects', {
         headers: { Authorization: `Bearer ${authToken}` },
       });
 
