@@ -24,7 +24,7 @@ const UserProfile = () => {
           return;
         }
 
-        const response = await axios.get('/api/user/profile', {
+        const response = await axios.get('https://ionots-dev-task-backend.onrender.com/api/user/profile', {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -51,7 +51,7 @@ const UserProfile = () => {
       try {
         const token = localStorage.getItem('token');
         const response = await axios.put(
-          '/api/user/profile',
+          'https://ionots-dev-task-backend.onrender.com/api/user/profile',
           {
             name: updatedUser.name,
             email: updatedUser.email,
