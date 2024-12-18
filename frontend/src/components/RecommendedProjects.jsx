@@ -23,7 +23,7 @@ const RecommendedProjects = () => {
     }
 
     try {
-      const response = await axios.get('/api/manage-projects/assign-projects', {
+      const response = await axios.get('https://ionots-dev-task-backend.onrender.com/api/manage-projects/assign-projects', {
         headers: { Authorization: `Bearer ${authToken}` },
       });
 
@@ -51,7 +51,7 @@ const RecommendedProjects = () => {
     }
 
     try {
-      const response = await axios.get('/api/manage-projects/get-all-projects', {
+      const response = await axios.get('https://ionots-dev-task-backend.onrender.com/api/manage-projects/get-all-projects', {
         headers: { Authorization: `Bearer ${authToken}` },
       });
 
@@ -79,7 +79,7 @@ const RecommendedProjects = () => {
     }
 
     try {
-      const response = await axios.get('/api/manage-projects/get-all-accepted-projects', {
+      const response = await axios.get('https://ionots-dev-task-backend.onrender.com/api/manage-projects/get-all-accepted-projects', {
         headers: { Authorization: `Bearer ${authToken}` },
       });
 
@@ -113,7 +113,7 @@ const RecommendedProjects = () => {
       return;
     }
     try {
-      const response = await axios.get(`/api/manage-projects/change-status-accepted/${projectId}`, {
+      const response = await axios.get(`https://ionots-dev-task-backend.onrender.com/api/manage-projects/change-status-accepted/${projectId}`, {
         headers: { Authorization: `Bearer ${authToken}` },
       });
 
