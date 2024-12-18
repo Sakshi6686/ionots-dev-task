@@ -26,7 +26,7 @@ const ProjectDetails = () => {
 
     try {
       const response = await axios.get(
-        `/api/manage-projects/get-project-description/${projectId}`,
+        `https://ionots-dev-task-backend.onrender.com/api/manage-projects/get-project-description/${projectId}`,
         {
             headers: { Authorization: `Bearer ${authToken}` },
         }
@@ -77,7 +77,7 @@ const ProjectDetails = () => {
 
     try {
       const response = await axios.post(
-        `/api/manage-projects/upload-project-file/${projectId}`,
+        `https://ionots-dev-task-backend.onrender.com/api/manage-projects/upload-project-file/${projectId}`,
         formData,
         {
           headers: {
