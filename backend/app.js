@@ -20,9 +20,14 @@ const app = express();
  
 app.use(express.json());  
 const corsOptions = {
-  origin: process.env.FRONTEND_URL || 'https://ionots-dev-task-frontend.onrender.com', // Replace with your frontend URL
-  credentials: true,
+  origin: [process.env.FRONTEND_URL || 'https://ionots-dev-task-frontend.onrender.com'], // Allow your frontend domain
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow necessary HTTP methods
+  credentials: true, // Allow credentials (cookies, authorization headers)
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allow necessary headers
 };
+
+ app.options('*', cors(corsOptions)); // Preflight request handler
+
 app.use(cors(corsOptions));
 
 
